@@ -103,3 +103,88 @@ img {
     border-right: 1px solid black;
     border-bottom: 1px solid black;
 }
+
+@media screen and (min-width: 800px) {
+
+    body {
+        padding: 2em;
+        margin-top: auto;
+        margin-bottom: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .ticket {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr 3em 2.5em;
+        height: fit-content;
+    }
+    
+    .title {
+        flex-direction: column;        
+        grid-column: 1 / span 9;
+        background: none;
+        color: black;
+        padding: 3em;
+        gap: 1em;
+
+        border: 1px solid black;
+    }
+
+    .title h1 {
+        font-size: 4.5em;
+    }
+
+    .qr {
+        grid-column: 10 / span 3;
+        grid-row: 1 / -1;
+
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .qr img {
+        max-width: 100%;
+        min-width: 9.375em;
+        width: 100%;
+    }
+
+    .date {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+
+        border-top: none;
+    }
+
+    .admit {
+        grid-column: 4 / span 3;
+        grid-row: 2;
+
+        border-top: none;
+    }
+
+    .price {
+        grid-column: 7 / span 3;
+        grid-row: 2;
+
+        border-left: none;
+    }
+
+    .disclaimer {
+        grid-column: 1 / span 9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .disclaimer p {
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+}
