@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+div {
+    background-color: #F83259;
+}
+
+.broken {
+    background-color: #63F6F2;
+}
+
+.infinity {
+    background-color: #FEFF04;
+}
