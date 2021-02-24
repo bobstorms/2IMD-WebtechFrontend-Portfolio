@@ -37,13 +37,28 @@ img {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 6em auto 3em 3em;
+    grid-template-rows: 8em auto 3em 3em;
 }
 
 .title {
     background-color: black;
     color: white;
     grid-column: 1 / span 2;
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: .625em;
+}
+
+.title h1 {
+    letter-spacing: .25em;
+    font-size: 2.6em;
+}
+
+.title p {
+    letter-spacing: .3em;
 }
 
 .qr {
