@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+h1, p {
+    text-transform: uppercase;
+}
+
+.disclaimer {
+    display: none;
+}
+
+body {
+    background-color: rgba(255, 255, 255, 0.7);
+    background-blend-mode: overlay;
+    background-image: url("./images/festival.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+img {
+    width: 100%;
+}
+
+.ticket {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 6em auto 3em 3em;
+}
+
+.title {
+    background-color: black;
+    color: white;
+    grid-column: 1 / span 2;
+}
+
+.qr {
+    grid-column: 1 / span 2;
+}
+
+.price {
+    grid-column: 1 / span 2;
+}
