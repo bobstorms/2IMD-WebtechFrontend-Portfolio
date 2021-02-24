@@ -112,6 +112,7 @@ img {
         margin-bottom: auto;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .ticket {
@@ -145,9 +146,7 @@ img {
     }
 
     .qr img {
-        max-width: 100%;
-        min-width: 9.375em;
-        width: 100%;
+        width: 160px;
     }
 
     .date {
@@ -185,6 +184,14 @@ img {
     .disclaimer p {
         text-transform: none;
         letter-spacing: normal;
+    }
+
+}
+
+@media screen and (min-width: 1000px) {
+
+    .qr img {
+        width: 200px;
     }
 
 }
