@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+h1, p {
+    text-transform: uppercase;
+    letter-spacing: .25em;
+}
+
+.disclaimer {
+    display: none;
+}
+
+body {
+    background-color: rgba(255, 255, 255, 0.7);
+    background-blend-mode: overlay;
+    background-image: url("./images/festival.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+img {
+    width: 100%;
+}
+
+.ticket {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 8em 1fr 3em 3em;
+    border-collapse: collapse;
+}
+
+.title {
+    background-color: black;
+    color: white;
+    grid-column: 1 / span 2;
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;    
+    gap: .625em;
+}
+
+.title h1 {
+    font-size: 2.6em;
+}
+
+.qr {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5em;
+}
+
+.qr img {
+    max-width: 400px;
+}
+
+.price {
+    grid-column: 1 / span 2;
+}
+
+.date, .admit, .price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 1.15em;
+}
+
+.light_text {
+    font-weight: 400;
+    margin-left: .625em;
+}
+
+.date {
+    border: 1px solid black;
+}
+
+.admit {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.price {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+@media screen and (min-width: 800px) {
+
+    body {
+        padding: 2em;
+        margin-top: auto;
+        margin-bottom: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ticket {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr 3em 2.5em;
+        height: fit-content;
+    }
+    
+    .title {
+        flex-direction: column;        
+        grid-column: 1 / span 9;
+        background: none;
+        color: black;
+        padding: 3em;
+        gap: 1em;
+
+        border: 1px solid black;
+    }
+
+    .title h1 {
+        font-size: 4.5em;
+    }
+
+    .qr {
+        grid-column: 10 / span 3;
+        grid-row: 1 / -1;
+
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .qr img {
+        width: 160px;
+    }
+
+    .date {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+
+        border-top: none;
+    }
+
+    .admit {
+        grid-column: 4 / span 3;
+        grid-row: 2;
+
+        border-top: none;
+    }
+
+    .price {
+        grid-column: 7 / span 3;
+        grid-row: 2;
+
+        border-left: none;
+    }
+
+    .disclaimer {
+        grid-column: 1 / span 9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .disclaimer p {
+        text-transform: none;
+        letter-spacing: normal;
+    }
+
+}
+
+@media screen and (min-width: 1000px) {
+
+    .qr img {
+        width: 200px;
+    }
+
+}
