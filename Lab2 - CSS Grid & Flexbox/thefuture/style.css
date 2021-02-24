@@ -1,9 +1,23 @@
 * {
     box-sizing: border-box;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5em;
 }
 
 div {
     background-color: #F83259;
+
+    font-weight: bold;
+    font-size: 1.5em;
+
+    padding: 1.5em;
+    text-align: center;
 }
 
 .broken {
