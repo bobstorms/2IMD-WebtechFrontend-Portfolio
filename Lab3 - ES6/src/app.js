@@ -59,10 +59,10 @@ class App {
     }
 
     createNote(evt) {
-        if(evt.key == "Enter" || evt.keyCode == 13) {
+        if(evt.key === "Enter" || evt.keyCode === 13) {
             evt.preventDefault();
 
-            if(this.txtTodo.value != "") {
+            if(this.txtTodo.value !== "") {
                 let newNote = new Note(this.txtTodo.value);
                 newNote.add();
                 newNote.saveToStorage();
