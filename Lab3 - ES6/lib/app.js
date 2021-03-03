@@ -25,23 +25,22 @@ var Note = /*#__PURE__*/function () {
   }, {
     key: "add",
     value: function add() {
-      console.log("Adding...");
       document.querySelector("#taskList").appendChild(this.element);
-      console.log(this.element);
     }
   }, {
     key: "saveToStorage",
-    value: function saveToStorage() {// HINT🤩
+    value: function saveToStorage() {
+      console.log("Saving to storage...");
+      var key = "note_".concat(localStorage.length);
+      localStorage.setItem(key, this.title);
+      console.log(localStorage); // HINT🤩
       // localStorage only supports strings, not arrays
       // if you want to store arrays, look at JSON.parse and JSON.stringify
     }
   }, {
     key: "remove",
     value: function remove() {
-      document.querySelector("#taskList").removeChild(this); // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
-      // in this function, 'this' will refer to the current note element
-      // .removeChild(this)
-      // remove the item from screen and from localstorage
+      document.querySelector("#taskList").removeChild(this); // remove the item from screen and from localstorage
     }
   }]);
 
@@ -71,14 +70,10 @@ var App = /*#__PURE__*/function () {
         evt.preventDefault();
         console.log("You entered: ".concat(this.txtTodo.value));
         var newNote = new Note(this.txtTodo.value);
-        this.reset();
         newNote.add();
-      } // this function should create a new note by using the Note() class
-      // HINT🤩
-      // note.add();
-      // note.saveToStorage();
-      // clear the text field with .reset in this class
-
+        newNote.saveToStorage();
+        this.reset();
+      }
     }
   }, {
     key: "reset",

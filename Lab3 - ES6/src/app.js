@@ -13,12 +13,14 @@ class Note {
     }
 
     add() {
-        console.log("Adding...");
         document.querySelector("#taskList").appendChild(this.element);
-        console.log(this.element);
     }
 
     saveToStorage() {
+        console.log("Saving to storage...");
+        let key = `note_${localStorage.length}`;
+        localStorage.setItem(key, this.title);
+        console.log(localStorage);
         // HINT🤩
         // localStorage only supports strings, not arrays
         // if you want to store arrays, look at JSON.parse and JSON.stringify
@@ -26,9 +28,6 @@ class Note {
 
     remove() {
         document.querySelector("#taskList").removeChild(this);
-        // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
-        // in this function, 'this' will refer to the current note element
-        // .removeChild(this)
         // remove the item from screen and from localstorage
     }
 }
@@ -54,15 +53,11 @@ class App {
             console.log(`You entered: ${this.txtTodo.value}`);
 
             let newNote = new Note(this.txtTodo.value);
-            this.reset();
             newNote.add();
-        }
+            newNote.saveToStorage();
 
-        // this function should create a new note by using the Note() class
-        // HINT🤩
-        // note.add();
-        // note.saveToStorage();
-        // clear the text field with .reset in this class
+            this.reset();
+        }
     }
 
     reset() {
