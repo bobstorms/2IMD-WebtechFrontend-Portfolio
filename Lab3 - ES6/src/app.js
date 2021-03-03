@@ -29,14 +29,14 @@ class Note {
     remove() {
         document.getElementById("taskList").removeChild(this);
         let value = this.innerText;
-        for(let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            let title = localStorage.getItem(key);
-            if(value == title) {
-                localStorage.removeItem(key);
-                break;
-            }
-        }
+
+        let notes = localStorage.getItem("notes");
+        notes = JSON.parse(notes) || [];
+
+        let index = notes.indexOf(value);
+        notes.splice(index, 1);
+
+        localStorage.setItem("notes", JSON.stringify(notes));
     }
 }
 

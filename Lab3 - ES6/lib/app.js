@@ -41,16 +41,11 @@ var Note = /*#__PURE__*/function () {
     value: function remove() {
       document.getElementById("taskList").removeChild(this);
       var value = this.innerText;
-
-      for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var title = localStorage.getItem(key);
-
-        if (value == title) {
-          localStorage.removeItem(key);
-          break;
-        }
-      }
+      var notes = localStorage.getItem("notes");
+      notes = JSON.parse(notes) || [];
+      var index = notes.indexOf(value);
+      notes.splice(index, 1);
+      localStorage.setItem("notes", JSON.stringify(notes));
     }
   }]);
 
