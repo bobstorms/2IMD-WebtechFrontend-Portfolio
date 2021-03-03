@@ -10,20 +10,24 @@ var Note = /*#__PURE__*/function () {
   function Note(title) {
     _classCallCheck(this, Note);
 
-    this.title = title; // HINT🤩 this.element = this.createElement(title);
+    this.title = title;
+    this.element = this.createElement(this.title);
   }
 
   _createClass(Note, [{
     key: "createElement",
     value: function createElement(title) {
-      var newNote = document.createElement("li"); // HINT🤩 newNote.addEventListener('click', this.remove.bind(newNote));
-
+      var newNote = document.createElement("li");
+      newNote.innerText = title;
+      newNote.addEventListener("click", this.remove.bind(newNote));
       return newNote;
     }
   }, {
     key: "add",
-    value: function add() {// HINT🤩
-      // this function should append the note to the screen somehow
+    value: function add() {
+      console.log("Adding...");
+      document.querySelector("#taskList").appendChild(this.element);
+      console.log(this.element);
     }
   }, {
     key: "saveToStorage",
@@ -33,7 +37,8 @@ var Note = /*#__PURE__*/function () {
     }
   }, {
     key: "remove",
-    value: function remove() {// HINT🤩 the meaning of 'this' was set by bind() in the createElement function
+    value: function remove() {
+      document.querySelector("#taskList").removeChild(this); // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
       // in this function, 'this' will refer to the current note element
       // .removeChild(this)
       // remove the item from screen and from localstorage
@@ -64,7 +69,10 @@ var App = /*#__PURE__*/function () {
     value: function createNote(evt) {
       if (evt.key == "Enter" || evt.keyCode == 13) {
         evt.preventDefault();
-        console.log(this.txtTodo.value);
+        console.log("You entered: ".concat(this.txtTodo.value));
+        var newNote = new Note(this.txtTodo.value);
+        this.reset();
+        newNote.add();
       } // this function should create a new note by using the Note() class
       // HINT🤩
       // note.add();
@@ -74,7 +82,8 @@ var App = /*#__PURE__*/function () {
     }
   }, {
     key: "reset",
-    value: function reset() {// this function should reset the form / clear the text field
+    value: function reset() {
+      this.txtTodo.value = "";
     }
   }]);
 
