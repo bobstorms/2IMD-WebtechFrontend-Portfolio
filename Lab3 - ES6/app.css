@@ -121,3 +121,7 @@ ul li {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+ul li:hover {
+    cursor: pointer;
+}
