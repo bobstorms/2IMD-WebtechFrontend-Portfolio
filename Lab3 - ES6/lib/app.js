@@ -25,20 +25,21 @@ var Note = /*#__PURE__*/function () {
   }, {
     key: "add",
     value: function add() {
-      document.querySelector("#taskList").appendChild(this.element);
+      document.getElementById("taskList").appendChild(this.element);
     }
   }, {
     key: "saveToStorage",
     value: function saveToStorage() {
       console.log("Saving to storage...");
-      var key = "note_".concat(localStorage.length);
-      localStorage.setItem(key, this.title);
-      console.log(localStorage);
+      var notes = localStorage.getItem("notes");
+      notes = JSON.parse(notes) || [];
+      notes.push(this.title);
+      localStorage.setItem("notes", JSON.stringify(notes));
     }
   }, {
     key: "remove",
     value: function remove() {
-      document.querySelector("#taskList").removeChild(this);
+      document.getElementById("taskList").removeChild(this);
       var value = this.innerText;
 
       for (var i = 0; i < localStorage.length; i++) {
@@ -49,8 +50,7 @@ var Note = /*#__PURE__*/function () {
           localStorage.removeItem(key);
           break;
         }
-      } // remove the item from screen and from localstorage
-
+      }
     }
   }]);
 
@@ -69,9 +69,12 @@ var App = /*#__PURE__*/function () {
   _createClass(App, [{
     key: "loadNotesFromStorage",
     value: function loadNotesFromStorage() {
-      for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var title = localStorage.getItem(key);
+      console.log("loading notes...");
+      var notes = localStorage.getItem("notes");
+      notes = JSON.parse(notes) || [];
+
+      for (var i = 0; i < notes.length; i++) {
+        var title = notes[i];
         var newNote = new Note(title);
         newNote.add();
       }
