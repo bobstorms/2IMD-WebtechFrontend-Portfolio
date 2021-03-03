@@ -34,19 +34,13 @@ class Note {
 class App {
     constructor() {
         console.log("👊🏼 The Constructor!");
-
         this.txtTodo = document.querySelector("#taskInput");
         this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
-        // HINT🤩
-        // pressing the enter key in the text field triggers the createNote function
-        // this.txtTodo = ???
-        // this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
-        // read up on .bind() -> we need to pass the current meaning of this to the eventListener
-        // when the app loads, we can show previously saved noted from localstorage
-        // this.loadNotesFromStorage();
+        this.loadNotesFromStorage();
     }
 
     loadNotesFromStorage() {
+        console.log("Loading notes...");
         // HINT🤩
         // load all notes from storage here and add them to the screen
     }
