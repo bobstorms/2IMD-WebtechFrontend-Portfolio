@@ -30,7 +30,6 @@ var Note = /*#__PURE__*/function () {
   }, {
     key: "saveToStorage",
     value: function saveToStorage() {
-      console.log("Saving to storage...");
       var notes = localStorage.getItem("notes");
       notes = JSON.parse(notes) || [];
       notes.push(this.title);
@@ -64,7 +63,6 @@ var App = /*#__PURE__*/function () {
   _createClass(App, [{
     key: "loadNotesFromStorage",
     value: function loadNotesFromStorage() {
-      console.log("loading notes...");
       var notes = localStorage.getItem("notes");
       notes = JSON.parse(notes) || [];
 
@@ -79,10 +77,13 @@ var App = /*#__PURE__*/function () {
     value: function createNote(evt) {
       if (evt.key == "Enter" || evt.keyCode == 13) {
         evt.preventDefault();
-        console.log("You entered: ".concat(this.txtTodo.value));
-        var newNote = new Note(this.txtTodo.value);
-        newNote.add();
-        newNote.saveToStorage();
+
+        if (this.txtTodo.value != "") {
+          var newNote = new Note(this.txtTodo.value);
+          newNote.add();
+          newNote.saveToStorage();
+        }
+
         this.reset();
       }
     }

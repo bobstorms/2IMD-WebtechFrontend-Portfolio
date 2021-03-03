@@ -17,8 +17,6 @@ class Note {
     }
 
     saveToStorage() {
-        console.log("Saving to storage...");
-
         let notes = localStorage.getItem("notes");
         notes = JSON.parse(notes) || [];
 
@@ -49,7 +47,6 @@ class App {
 
     loadNotesFromStorage() {
 
-        console.log("loading notes...");
         let notes = localStorage.getItem("notes");
         notes = JSON.parse(notes) || [];
 
@@ -64,11 +61,12 @@ class App {
     createNote(evt) {
         if(evt.key == "Enter" || evt.keyCode == 13) {
             evt.preventDefault();
-            console.log(`You entered: ${this.txtTodo.value}`);
 
-            let newNote = new Note(this.txtTodo.value);
-            newNote.add();
-            newNote.saveToStorage();
+            if(this.txtTodo.value != "") {
+                let newNote = new Note(this.txtTodo.value);
+                newNote.add();
+                newNote.saveToStorage();
+            }
 
             this.reset();
         }
