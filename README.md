@@ -12,3 +12,6 @@ My portfolio repo for all the labs of webtech frontend.
 
 ![Flexbox Froggy](https://github.com/bobstorms/2IMD-WebtechFrontend-Portfolio/blob/main/Lab2%20-%20CSS%20Grid%20%26%20Flexbox/flexbox-froggy-completed.png)
 ![Grid Garden](https://github.com/bobstorms/2IMD-WebtechFrontend-Portfolio/blob/main/Lab2%20-%20CSS%20Grid%20%26%20Flexbox/css-grid-garden-completed.png)
+
+## Lab 3 - ES6
+[Codesandbox: Task List](https://codesandbox.io/s/lab3-todo-app-forked-94gei)
