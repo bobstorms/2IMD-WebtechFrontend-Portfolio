@@ -62,12 +62,16 @@ var App = /*#__PURE__*/function () {
   }, {
     key: "createNote",
     value: function createNote(evt) {
-      console.log(evt); // this function should create a new note by using the Note() class
+      if (evt.key == "Enter" || evt.keyCode == 13) {
+        evt.preventDefault();
+        console.log("Pressed enter.");
+      } // this function should create a new note by using the Note() class
       // HINT🤩
       // note.add();
       // note.saveToStorage();
       // clear the text field with .reset in this class
       // if (e.key === "Enter")
+
     }
   }, {
     key: "reset",

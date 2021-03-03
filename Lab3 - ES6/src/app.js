@@ -46,7 +46,12 @@ class App {
     }
 
     createNote(evt) {
-        console.log(evt);
+        
+        if(evt.key == "Enter" || evt.keyCode == 13) {
+            evt.preventDefault();
+            console.log("Pressed enter.");
+        }
+
         // this function should create a new note by using the Note() class
         // HINT🤩
         // note.add();
