@@ -64,13 +64,12 @@ var App = /*#__PURE__*/function () {
     value: function createNote(evt) {
       if (evt.key == "Enter" || evt.keyCode == 13) {
         evt.preventDefault();
-        console.log("Pressed enter.");
+        console.log(this.txtTodo.value);
       } // this function should create a new note by using the Note() class
       // HINT🤩
       // note.add();
       // note.saveToStorage();
       // clear the text field with .reset in this class
-      // if (e.key === "Enter")
 
     }
   }, {

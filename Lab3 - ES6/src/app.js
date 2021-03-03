@@ -49,7 +49,7 @@ class App {
         
         if(evt.key == "Enter" || evt.keyCode == 13) {
             evt.preventDefault();
-            console.log("Pressed enter.");
+            console.log(this.txtTodo.value);
         }
 
         // this function should create a new note by using the Note() class
@@ -57,7 +57,6 @@ class App {
         // note.add();
         // note.saveToStorage();
         // clear the text field with .reset in this class
-        // if (e.key === "Enter")
     }
 
     reset() {
