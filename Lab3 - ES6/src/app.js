@@ -42,6 +42,14 @@ class App {
 
     loadNotesFromStorage() {
         console.log("Loading notes...");
+        console.log(localStorage);
+        
+        for(let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            let title = localStorage.getItem(key);
+            let newNote = new Note(title);
+            newNote.add();
+        }
         // HINT🤩
         // load all notes from storage here and add them to the screen
     }

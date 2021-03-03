@@ -60,8 +60,17 @@ var App = /*#__PURE__*/function () {
   _createClass(App, [{
     key: "loadNotesFromStorage",
     value: function loadNotesFromStorage() {
-      console.log("Loading notes..."); // HINT🤩
+      console.log("Loading notes...");
+      console.log(localStorage);
+
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var title = localStorage.getItem(key);
+        var newNote = new Note(title);
+        newNote.add();
+      } // HINT🤩
       // load all notes from storage here and add them to the screen
+
     }
   }, {
     key: "createNote",
