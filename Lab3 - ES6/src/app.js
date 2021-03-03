@@ -21,37 +21,39 @@ class Note {
         let key = `note_${localStorage.length}`;
         localStorage.setItem(key, this.title);
         console.log(localStorage);
-        // HINT🤩
-        // localStorage only supports strings, not arrays
-        // if you want to store arrays, look at JSON.parse and JSON.stringify
     }
 
     remove() {
         document.querySelector("#taskList").removeChild(this);
+        let value = this.innerText;
+        for(let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            let title = localStorage.getItem(key);
+            if(value == title) {
+                localStorage.removeItem(key);
+                break;
+            }
+        }
         // remove the item from screen and from localstorage
     }
 }
 
 class App {
     constructor() {
-        console.log("👊🏼 The Constructor!");
         this.txtTodo = document.querySelector("#taskInput");
         this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
         this.loadNotesFromStorage();
     }
 
     loadNotesFromStorage() {
-        console.log("Loading notes...");
-        console.log(localStorage);
-        
+
         for(let i = 0; i < localStorage.length; i++) {
             let key = localStorage.key(i);
             let title = localStorage.getItem(key);
             let newNote = new Note(title);
             newNote.add();
         }
-        // HINT🤩
-        // load all notes from storage here and add them to the screen
+
     }
 
     createNote(evt) {

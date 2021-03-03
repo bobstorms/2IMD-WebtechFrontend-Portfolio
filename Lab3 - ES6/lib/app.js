@@ -33,14 +33,24 @@ var Note = /*#__PURE__*/function () {
       console.log("Saving to storage...");
       var key = "note_".concat(localStorage.length);
       localStorage.setItem(key, this.title);
-      console.log(localStorage); // HINT🤩
-      // localStorage only supports strings, not arrays
-      // if you want to store arrays, look at JSON.parse and JSON.stringify
+      console.log(localStorage);
     }
   }, {
     key: "remove",
     value: function remove() {
-      document.querySelector("#taskList").removeChild(this); // remove the item from screen and from localstorage
+      document.querySelector("#taskList").removeChild(this);
+      var value = this.innerText;
+
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var title = localStorage.getItem(key);
+
+        if (value == title) {
+          localStorage.removeItem(key);
+          break;
+        }
+      } // remove the item from screen and from localstorage
+
     }
   }]);
 
@@ -51,7 +61,6 @@ var App = /*#__PURE__*/function () {
   function App() {
     _classCallCheck(this, App);
 
-    console.log("👊🏼 The Constructor!");
     this.txtTodo = document.querySelector("#taskInput");
     this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
     this.loadNotesFromStorage();
@@ -60,17 +69,12 @@ var App = /*#__PURE__*/function () {
   _createClass(App, [{
     key: "loadNotesFromStorage",
     value: function loadNotesFromStorage() {
-      console.log("Loading notes...");
-      console.log(localStorage);
-
       for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var title = localStorage.getItem(key);
         var newNote = new Note(title);
         newNote.add();
-      } // HINT🤩
-      // load all notes from storage here and add them to the screen
-
+      }
     }
   }, {
     key: "createNote",
