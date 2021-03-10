@@ -1,6 +1,16 @@
 class App {
 
-    // Code
+    constructor() {
+        this.findBike();
+    }
+
+    findBike() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            console.log(lat + " " + lon);
+        });
+    }
 
 }
 
