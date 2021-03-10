@@ -30,14 +30,24 @@ class App {
 
     calculateDistances(userPos) {
 
+        // Add distance to every bikeLocation
         this.bikeLocations.forEach((location) => {
             let bikePos = location.geometry;
             let distance = this.getDistance(userPos.y, userPos.x, bikePos.y, bikePos.x);
             location.distance = distance;
-            console.log("distance");
+            console.log(distance);
         });
         
+        // Sort bikeLocations from closest to furthest
         this.bikeLocations.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
+        this.showNearestBikeStation();
+
+    }
+
+    showNearestBikeStation() {
+
+        let nearestBikeStation = this.bikeLocations[0];
+        console.log("This is the nearest bike station: ", nearestBikeStation);
 
     }
 
