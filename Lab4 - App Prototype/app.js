@@ -5,6 +5,18 @@ class App {
         this.getLocation();
     }
 
+    getBikeStations() {
+        let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
+        fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((json) => {
+                console.log(json);
+                this.getLocation();
+            });
+    }
+
     getLocation() {
         navigator.geolocation.getCurrentPosition((position) => {
             let pos = {
