@@ -25,21 +25,25 @@ class App {
             }
             console.log("Found location!");
             this.calculateDistances(pos);
+            this.getWeatherInfo(pos);
         });
     }
 
     calculateDistances(userPos) {
 
+        console.log("Calculating distance for every bike location...");
         // Add distance to every bikeLocation
         this.bikeLocations.forEach((location) => {
             let bikePos = location.geometry;
             let distance = this.getDistance(userPos.y, userPos.x, bikePos.y, bikePos.x);
             location.distance = distance;
-            console.log(distance);
         });
+        console.log("Done calculating distance!");
         
+        console.log("Sorting bike locations...");
         // Sort bikeLocations from closest to furthest
         this.bikeLocations.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
+        console.log("Done sorting bike locations!");
         this.showNearestBikeStation();
 
     }
