@@ -13,6 +13,9 @@ class App {
             })
             .then((json) => {
                 console.log(json);
+                let bikeLocations = json.features;
+                bikeLocations.forEach(location => console.log(location));
+
                 this.getLocation();
             });
     }
