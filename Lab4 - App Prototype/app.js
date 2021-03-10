@@ -5,6 +5,7 @@ class App {
     }
 
     getBikeStations() {
+        console.log("test");
         let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
         fetch(url)
             .then((response) => {
@@ -69,7 +70,7 @@ class App {
                 let temperature = json.main.temp;
                 let weatherParameters = json.weather[0].main;
 
-                console.log(temperature, weatherParameters);
+                this.showWeatherInfo(temperature, weatherParameters);
             });
     }
 
@@ -82,11 +83,12 @@ class App {
             console.log("Just put on some extra clothes.");
         }
 
-        if(param.contains("Rain") || param.includes("Rain")) {
+        if(param.toLowerCase().includes("rain")) {
             console.log("It's raining, but you can take an umbrella with you!");
         } else {
             console.log("It's not even raining, what are you waiting for!");
         }
+        
     }
 
     getDistance(lat1, lon1, lat2, lon2) {
