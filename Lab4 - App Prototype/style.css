@@ -1,0 +1,9 @@
+* {
+    font-family: sans-serif;
+}
+
+#ad {
+    height: 600px;
+    width: 300px;
+    background-color: lightgrey;
+}
