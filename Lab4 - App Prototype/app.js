@@ -34,8 +34,10 @@ class App {
             let bikePos = location.geometry;
             let distance = this.getDistance(userPos.y, userPos.x, bikePos.y, bikePos.x);
             location.distance = distance;
-            //console.log("User position: " + userPos.x + ", " + userPos.y + " | Bike position: " + bikePos.x + ", " + bikePos.y + " | Distance: " + distance);
+            console.log("distance");
         });
+        
+        this.bikeLocations.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
 
     }
 
