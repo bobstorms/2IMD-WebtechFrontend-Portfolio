@@ -11,7 +11,6 @@ class App {
                 return response.json();
             })
             .then((json) => {
-                console.log(json);
                 this.bikeLocations = json.features;
                 this.getLocation();
             });
@@ -49,10 +48,45 @@ class App {
     }
 
     showNearestBikeStation() {
-
         let nearestBikeStation = this.bikeLocations[0];
         console.log("This is the nearest bike station: ", nearestBikeStation);
+    }
 
+    getWeatherInfo(pos) {
+        console.log("Getting weather info for...");
+        let lat = pos.y;
+        let lon = pos.x;
+        const apiKey = "56b676884dc4e3dae2aa38abcca6b71a";
+
+        let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        console.log(url);
+        fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((json) => {
+                console.log(json);
+                let temperature = json.main.temp;
+                let weatherParameters = json.weather[0].main;
+
+                console.log(temperature, weatherParameters);
+            });
+    }
+
+    showWeatherInfo(temp, param) {
+        if(temp > 20) {
+            console.log("It's a very nice temperature to bike!");
+        } else if(temp > 10) {
+            console.log("It's warm enough to bike!");
+        } else {
+            console.log("Just put on some extra clothes.");
+        }
+
+        if(param.contains("Rain") || param.includes("Rain")) {
+            console.log("It's raining, but you can take an umbrella with you!");
+        } else {
+            console.log("It's not even raining, what are you waiting for!");
+        }
     }
 
     getDistance(lat1, lon1, lat2, lon2) {
