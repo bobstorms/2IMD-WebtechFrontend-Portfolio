@@ -2,11 +2,9 @@ class App {
 
     constructor() {
         this.getBikeStations();
-        this.getLocation();
     }
 
     getBikeStations() {
-        /*
         let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
         fetch(url)
             .then((response) => {
@@ -15,24 +13,28 @@ class App {
             .then((json) => {
                 console.log(json);
                 let bikeLocations = json.features;
-
-                bikeLocations.forEach((location) => {
-                    console.log(location)
-                });
-
-                this.getLocation();
+                this.getLocation(bikeLocations);
             });
-        */
     }
 
-    getLocation() {
+    getLocation(bikeLocations) {
         navigator.geolocation.getCurrentPosition((position) => {
             let pos = {
-                x: position.coords.latitude,
-                y: position.coords.longitude
+                x: position.coords.longitude,
+                y: position.coords.latitude
             }
-            return pos;
+            this.calculateDistances(pos, bikeLocations);
         });
+    }
+
+    calculateDistances(userPos, bikeLocations) {
+
+        bikeLocations.forEach((location) => {
+            let bikePos = location.geometry;
+            let distance = this.getDistance(userPos.y, userPos.x, bikePos.y, bikePos.x);
+            console.log("User position: " + userPos.x + ", " + userPos.y + " | Bike position: " + bikePos.x + ", " + bikePos.y + " | Distance: " + distance);
+        });
+
     }
 
     getDistance(lat1, lon1, lat2, lon2) {
