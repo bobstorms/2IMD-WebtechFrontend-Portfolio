@@ -23,6 +23,7 @@ class App {
                 x: position.coords.longitude,
                 y: position.coords.latitude
             }
+            console.log("Found location!");
             this.calculateDistances(pos);
         });
     }
@@ -30,9 +31,9 @@ class App {
     calculateDistances(userPos) {
 
         this.bikeLocations.forEach((location) => {
-            console.log(location);
             let bikePos = location.geometry;
             let distance = this.getDistance(userPos.y, userPos.x, bikePos.y, bikePos.x);
+            location.distance = distance;
             //console.log("User position: " + userPos.x + ", " + userPos.y + " | Bike position: " + bikePos.x + ", " + bikePos.y + " | Distance: " + distance);
         });
 
