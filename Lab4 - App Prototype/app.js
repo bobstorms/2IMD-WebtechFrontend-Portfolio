@@ -12,27 +12,28 @@ class App {
             })
             .then((json) => {
                 console.log(json);
-                let bikeLocations = json.features;
-                this.getLocation(bikeLocations);
+                this.bikeLocations = json.features;
+                this.getLocation();
             });
     }
 
-    getLocation(bikeLocations) {
+    getLocation() {
         navigator.geolocation.getCurrentPosition((position) => {
             let pos = {
                 x: position.coords.longitude,
                 y: position.coords.latitude
             }
-            this.calculateDistances(pos, bikeLocations);
+            this.calculateDistances(pos);
         });
     }
 
-    calculateDistances(userPos, bikeLocations) {
+    calculateDistances(userPos) {
 
-        bikeLocations.forEach((location) => {
+        this.bikeLocations.forEach((location) => {
+            console.log(location);
             let bikePos = location.geometry;
             let distance = this.getDistance(userPos.y, userPos.x, bikePos.y, bikePos.x);
-            console.log("User position: " + userPos.x + ", " + userPos.y + " | Bike position: " + bikePos.x + ", " + bikePos.y + " | Distance: " + distance);
+            //console.log("User position: " + userPos.x + ", " + userPos.y + " | Bike position: " + bikePos.x + ", " + bikePos.y + " | Distance: " + distance);
         });
 
     }
