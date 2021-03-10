@@ -1,14 +1,17 @@
 class App {
 
     constructor() {
+        this.getBikeStations();
         this.getLocation();
     }
 
     getLocation() {
         navigator.geolocation.getCurrentPosition((position) => {
-            let lat = position.coords.latitude;
-            let lon = position.coords.longitude;
-            console.log(lat + " " + lon);
+            let pos = {
+                x: position.coords.latitude,
+                y: position.coords.longitude
+            }
+            return pos;
         });
     }
 
