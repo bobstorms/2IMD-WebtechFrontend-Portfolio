@@ -1,10 +1,10 @@
 class App {
 
     constructor() {
-        this.findBike();
+        this.getLocation();
     }
 
-    findBike() {
+    getLocation() {
         navigator.geolocation.getCurrentPosition((position) => {
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
