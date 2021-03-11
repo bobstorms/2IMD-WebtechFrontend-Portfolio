@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+.hidden {
+    display: none;
+}
+
 html, body, p {
     margin: 0;
     padding: 0;
@@ -15,6 +19,20 @@ html, body, p {
     position: relative;
 }
 
+.searching {
+    font-size: 1.75em;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.35em;
+
+    animation-name: pulse2, fade;
+    animation-duration: 2s, .4s;
+    animation-fill-mode: both, forwards;
+    animation-iteration-count: infinite, 1;
+    animation-play-state: running, paused;
+    animation-direction: normal, reverse;
+}
+
 .header {
     background-color: #D11E49;
     color: white;
@@ -24,16 +42,19 @@ html, body, p {
     justify-content: center;
     gap: .2em;
     height: 150px;
+    padding: 0px 30px;
 }
 
 .distance {
     font-size: 2.2em;
     font-weight: 900;
+    opacity: 0;
 }
 
 .intro, .address {
     font-size: 1.25em;
     text-align: center;
+    opacity: 0;
 }
 
 .content {
@@ -77,6 +98,25 @@ html, body, p {
     50% {
         transform: scale(1.1);
     }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse2 {
+    0% {
+        transform: scale(1);
+    }
+
+    33% {
+        transform: scale(1.06);
+    }
+
+    66% {
+        transform: scale(1.06);
+    }
+
     100% {
         transform: scale(1);
     }
@@ -90,6 +130,8 @@ html, body, p {
     font-size: 1.25em;
     line-height: 1.35em;
     text-shadow: 0px 2px 10px #000;
+
+    opacity: 0;
 }
 
 .logo {
@@ -97,4 +139,18 @@ html, body, p {
     left: 0;
     bottom: 0;
     height: 85px;
+}
+
+.fadein {
+    animation: fade 1.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

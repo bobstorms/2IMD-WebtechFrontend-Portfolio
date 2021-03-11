@@ -1,15 +1,17 @@
 const distanceText = document.querySelector(".distance");
 const addressText = document.querySelector(".address");
 const motivationText = document.querySelector(".motivation");
+const introText = document.querySelector(".intro");
+const searchText = document.querySelector(".searching");
 
 class App {
 
     constructor() {
-        this.getBikeStations();
+        //this.getBikeStations();
+        this.getLocation();
     }
 
     getBikeStations() {
-        console.log("test");
         let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
         fetch(url)
             .then((response) => {
@@ -17,7 +19,8 @@ class App {
             })
             .then((json) => {
                 this.bikeLocations = json.features;
-                this.getLocation();
+                //this.getLocation();
+                this.calculateDistances();
             });
     }
 
@@ -28,12 +31,16 @@ class App {
                 y: position.coords.latitude
             }
             console.log("Found location!");
-            this.calculateDistances(pos);
-            this.getWeatherInfo(pos);
+            this.pos = pos;
+            //this.calculateDistances(pos);
+            this.getBikeStations();
+            this.getWeatherInfo();
         });
     }
 
-    calculateDistances(userPos) {
+    calculateDistances() {
+
+        let userPos = this.pos;
 
         console.log("Calculating distance for every bike location...");
         // Add distance to every bikeLocation
@@ -73,14 +80,25 @@ class App {
         district = districtFrontPart + districBackPart;
 
         addressText.innerText = `${street} ${number}, ${district}`;
-        
-        //let number = nearestBikeStation.attributes.
+        searchText.style["animation-play-state"] = "running, running";
+
+        setTimeout(() => {
+            searchText.style.display = "none";
+
+            introText.style.display = "inline";
+            distanceText.style.display = "inline";
+            addressText.style.display = "inline";
+
+            introText.classList += " fadein";
+            distanceText.classList += " fadein";
+            addressText.classList += " fadein";
+        }, 400);
     }
 
-    getWeatherInfo(pos) {
+    getWeatherInfo() {
         console.log("Getting weather info for...");
-        let lat = pos.y;
-        let lon = pos.x;
+        let lat = this.pos.y;
+        let lon = this.pos.x;
         const apiKey = "56b676884dc4e3dae2aa38abcca6b71a";
 
         let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
@@ -119,6 +137,7 @@ class App {
 
         let message = messageFront + " " + messageBack;
         motivationText.innerText = message;
+        motivationText.classList += " fadein";
         
     }
 
@@ -132,11 +151,15 @@ class App {
         let a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         let distance = R * c; // Distance in km
-        return distance;
+        return formatNumber(distance);
     }
 
     degToRad(deg) {
         return deg * Math.PI / 180;
+    }
+
+    formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     }
 
 }
