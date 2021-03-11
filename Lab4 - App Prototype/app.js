@@ -24,15 +24,15 @@ class App {
                     this.bikeLocations = json.features;
                     this.saveBikeLocations(this.bikeLocations);
                     //this.getLocation();
+                    this.calculateDistances();
                 });
         } else {
             console.log("Load from local storage...");
             let bikeLocations = localStorage.getItem("bike-locations");
             bikeLocations = JSON.parse(bikeLocations);
             this.bikeLocations = bikeLocations;
+            this.calculateDistances();
         }
-
-        this.calculateDistances();
 
     }
 
@@ -168,12 +168,24 @@ class App {
     }
 
     saveBikeLocations() {
+        console.log("Saving bikeLocations...");
         let bikeLocations = localStorage.getItem("bike-locations");
         bikeLocations = JSON.parse(bikeLocations) || this.bikeLocations;
         localStorage.setItem("bike-locations", JSON.stringify(bikeLocations));
+
+        let timeStamp = Date.now();
+        localStorage.setItem("bike-time", JSON.stringify(timeStamp));
     }
 
     saveWeatherInfo() {
+        //
+    }
+
+    checkReloadBikeLocations() {
+        //
+    }
+
+    checkReloadWeatherInfo() {
         //
     }
 
