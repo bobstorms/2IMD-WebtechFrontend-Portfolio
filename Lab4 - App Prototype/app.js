@@ -65,6 +65,7 @@ class App {
         console.log(nearestBikeStation);
 
         let distance = Math.round(nearestBikeStation.distance * 1000);
+        distance = this.formatNumber(distance);
         distanceText.innerText = `${distance} meter`;
 
         let street = nearestBikeStation.attributes.Straatnaam;
@@ -151,7 +152,7 @@ class App {
         let a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         let distance = R * c; // Distance in km
-        return formatNumber(distance);
+        return distance;
     }
 
     degToRad(deg) {
