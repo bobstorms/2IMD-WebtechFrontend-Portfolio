@@ -4,8 +4,6 @@ const motivationText = document.querySelector(".motivation");
 const introText = document.querySelector(".intro");
 const searchText = document.querySelector(".searching");
 
-let reloadBikes = false;
-
 class App {
 
     constructor() {
@@ -22,11 +20,11 @@ class App {
                 })
                 .then((json) => {
                     this.bikeLocations = json.features;
-                    this.saveBikeLocations(this.bikeLocations);
+                    this.saveBikeLocations();
                     this.calculateDistances();
                 });
         } else {
-            console.log("Load from local storage...");
+            console.log("Load bike locations from local storage...");
             let bikeLocations = localStorage.getItem("bike-locations");
             bikeLocations = JSON.parse(bikeLocations);
             this.bikeLocations = bikeLocations;
@@ -107,24 +105,35 @@ class App {
     }
 
     getWeatherInfo() {
-        console.log("Getting weather info for...");
-        let lat = this.pos.y;
-        let lon = this.pos.x;
-        const apiKey = "56b676884dc4e3dae2aa38abcca6b71a";
 
-        let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-        console.log(url);
-        fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                console.log(json);
-                let temperature = json.main.temp;
-                let weatherParameters = json.weather[0].main;
+        if(this.checkReloadWeatherInfo()) {
+            console.log("Getting weather info for...");
+            let lat = this.pos.y;
+            let lon = this.pos.x;
+            const apiKey = "56b676884dc4e3dae2aa38abcca6b71a";
+    
+            let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+            console.log(url);
+            fetch(url)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((json) => {
+                    console.log(json);
+                    let temperature = json.main.temp;
+                    let weatherParameters = json.weather[0].main;
+                    this.saveWeatherInfo(temperature, weatherParameters);
+                    this.showWeatherInfo(temperature, weatherParameters);
+                });
+        } else {
+            console.log("Load weather info from local storage...");
+            let weatherInfo = localStorage.getItem("weather-info");
+            weatherInfo = JSON.parse(weatherInfo);
+            let temperature = weatherInfo.temperature;
+            let weatherParameters = weatherInfo.weatherParameters;
+            this.showWeatherInfo(temperature, weatherParameters);
+        }
 
-                this.showWeatherInfo(temperature, weatherParameters);
-            });
     }
 
     showWeatherInfo(temp, param) {
@@ -170,12 +179,20 @@ class App {
 
         localStorage.setItem("bike-locations", JSON.stringify(this.bikeLocations));
 
-        let timeStamp = Date.now();
-        localStorage.setItem("bike-time", JSON.stringify(timeStamp));
+        let timestamp = Date.now();
+        localStorage.setItem("bike-time", JSON.stringify(timestamp));
     }
 
-    saveWeatherInfo() {
-        //
+    saveWeatherInfo(temperature, weatherParameters) {
+        console.log("Saving weatherInfo...");
+        let weatherInfo = {
+            temperature: temperature,
+            weatherParameters: weatherParameters
+        }
+        localStorage.setItem("weather-info", JSON.stringify(weatherInfo));
+
+        let timestamp = Date.now();
+        localStorage.setItem("weather-time", JSON.stringify(timestamp));
     }
 
     checkReloadBikeLocations() {
@@ -197,7 +214,16 @@ class App {
     }
 
     checkReloadWeatherInfo() {
-        //
+        let timestamp = parseInt(localStorage.getItem("weather-time")) || 0;
+
+        let timeNow = Date.now();
+        let timeDifference = Math.round((timeNow - timestamp) * 0.001 / 60);
+
+        if(timeDifference >= 10) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     degToRad(deg) {
