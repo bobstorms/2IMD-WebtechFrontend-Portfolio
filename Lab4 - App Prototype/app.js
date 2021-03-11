@@ -4,6 +4,8 @@ const motivationText = document.querySelector(".motivation");
 const introText = document.querySelector(".intro");
 const searchText = document.querySelector(".searching");
 
+let reload = false;
+
 class App {
 
     constructor() {
@@ -12,16 +14,26 @@ class App {
     }
 
     getBikeStations() {
-        let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
-        fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                this.bikeLocations = json.features;
-                //this.getLocation();
-                this.calculateDistances();
-            });
+        if(reload) {
+            let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
+            fetch(url)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((json) => {
+                    this.bikeLocations = json.features;
+                    this.saveBikeLocations(this.bikeLocations);
+                    //this.getLocation();
+                });
+        } else {
+            console.log("Load from local storage...");
+            let bikeLocations = localStorage.getItem("bike-locations");
+            bikeLocations = JSON.parse(bikeLocations);
+            this.bikeLocations = bikeLocations;
+        }
+
+        this.calculateDistances();
+
     }
 
     getLocation() {
@@ -153,6 +165,16 @@ class App {
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         let distance = R * c; // Distance in km
         return distance;
+    }
+
+    saveBikeLocations() {
+        let bikeLocations = localStorage.getItem("bike-locations");
+        bikeLocations = JSON.parse(bikeLocations) || this.bikeLocations;
+        localStorage.setItem("bike-locations", JSON.stringify(bikeLocations));
+    }
+
+    saveWeatherInfo() {
+        //
     }
 
     degToRad(deg) {
