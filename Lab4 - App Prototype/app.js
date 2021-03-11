@@ -4,17 +4,17 @@ const motivationText = document.querySelector(".motivation");
 const introText = document.querySelector(".intro");
 const searchText = document.querySelector(".searching");
 
-let reload = false;
+let reloadBikes = false;
 
 class App {
 
     constructor() {
-        //this.getBikeStations();
         this.getLocation();
     }
 
     getBikeStations() {
-        if(reload) {
+        
+        if(this.checkReloadBikeLocations()) {
             let url = "https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek1/MapServer/57/query?where=1%3D1&outFields=Straatnaam,Huisnummer,District,Gebruik,Aantal_plaatsen&outSR=4326&f=json";
             fetch(url)
                 .then((response) => {
@@ -23,7 +23,6 @@ class App {
                 .then((json) => {
                     this.bikeLocations = json.features;
                     this.saveBikeLocations(this.bikeLocations);
-                    //this.getLocation();
                     this.calculateDistances();
                 });
         } else {
@@ -44,7 +43,6 @@ class App {
             }
             console.log("Found location!");
             this.pos = pos;
-            //this.calculateDistances(pos);
             this.getBikeStations();
             this.getWeatherInfo();
         });
@@ -169,9 +167,8 @@ class App {
 
     saveBikeLocations() {
         console.log("Saving bikeLocations...");
-        let bikeLocations = localStorage.getItem("bike-locations");
-        bikeLocations = JSON.parse(bikeLocations) || this.bikeLocations;
-        localStorage.setItem("bike-locations", JSON.stringify(bikeLocations));
+
+        localStorage.setItem("bike-locations", JSON.stringify(this.bikeLocations));
 
         let timeStamp = Date.now();
         localStorage.setItem("bike-time", JSON.stringify(timeStamp));
@@ -182,7 +179,21 @@ class App {
     }
 
     checkReloadBikeLocations() {
-        //
+        // If timestamp doesn't exist in localStorage, then set timestamp to 0. The time
+        // difference will then be larger than any limit, which will trigger the API to
+        // load the bikeLocations for the first time and save them to localStorage.
+        let timestamp = parseInt(localStorage.getItem("bike-time")) || 0;
+
+        let timeNow = Date.now();
+        let timeDifference = Math.round((timeNow - timestamp) * 0.001 / 60); // Time difference in minutes
+
+        // Will return true if it has been more than 60 minutes since the locations
+        // were last loaded.
+        if(timeDifference >= 60) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     checkReloadWeatherInfo() {
