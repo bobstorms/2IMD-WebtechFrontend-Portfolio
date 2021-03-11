@@ -1,3 +1,7 @@
+const distanceText = document.querySelector(".distance");
+const addressText = document.querySelector(".address");
+const motivationText = document.querySelector(".motivation");
+
 class App {
 
     constructor() {
@@ -50,7 +54,27 @@ class App {
 
     showNearestBikeStation() {
         let nearestBikeStation = this.bikeLocations[0];
-        console.log("This is the nearest bike station: ", nearestBikeStation);
+
+        console.log(nearestBikeStation);
+
+        let distance = Math.round(nearestBikeStation.distance * 1000);
+        distanceText.innerText = `${distance} meter`;
+
+        let street = nearestBikeStation.attributes.Straatnaam;
+        let indexPostalCode = street.indexOf("(") - 1;
+        let subString = street.substring(indexPostalCode, street.length);
+        street = street.replace(subString, "");
+
+        let number = nearestBikeStation.attributes.Huisnummer;
+
+        let district = nearestBikeStation.attributes.District;
+        let districtFrontPart = district.substring(0, 1);
+        let districBackPart = district.substring(1, district.length).toLowerCase();
+        district = districtFrontPart + districBackPart;
+
+        addressText.innerText = `${street} ${number}, ${district}`;
+        
+        //let number = nearestBikeStation.attributes.
     }
 
     getWeatherInfo(pos) {
@@ -75,19 +99,26 @@ class App {
     }
 
     showWeatherInfo(temp, param) {
+        let messageFront;
+
         if(temp > 20) {
-            console.log("It's a very nice temperature to bike!");
+            messageFront = "Het is prachtig weer om te fietsen.";
         } else if(temp > 10) {
-            console.log("It's warm enough to bike!");
+            messageFront = "Het is prima weer om te fietsen.";
         } else {
-            console.log("Just put on some extra clothes.");
+            messageFront = "Doe wat extra kleren aan om te fietsen.";   
         }
 
+        let messageBack;
+
         if(param.toLowerCase().includes("rain")) {
-            console.log("It's raining, but you can take an umbrella with you!");
+            messageBack = "Het regent wel, maar laat dat de pret niet bederven!";
         } else {
-            console.log("It's not even raining, what are you waiting for!");
+            messageBack = "Het is zelfs niet aan het regenen, waar wacht je nog op!";
         }
+
+        let message = messageFront + " " + messageBack;
+        motivationText.innerText = message;
         
     }
 
