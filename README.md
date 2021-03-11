@@ -15,3 +15,6 @@ My portfolio repo for all the labs of webtech frontend.
 
 ## Lab 3 - ES6
 [Codesandbox: Task List](https://codesandbox.io/s/lab3-todo-app-forked-94gei)
+
+## Lab 4 - App Prototype
+[Codesandbox: Ad - Velo Antwerpen](https://codesandbox.io/s/bob-storms-ad-velo-antwerpen-qiv42)
