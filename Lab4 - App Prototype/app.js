@@ -112,7 +112,7 @@ class App {
             let lon = this.pos.x;
             const apiKey = "56b676884dc4e3dae2aa38abcca6b71a";
     
-            let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+            let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
             console.log(url);
             fetch(url)
                 .then((response) => {
