@@ -1,10 +1,20 @@
 const getAllMessages = (req, res) => {
-    res.json({
-        status: "success",
-        data: {
-            message: "GET all messages"
-        }
-    });
+    if(req.query.user) {
+        let user = req.query.user;
+        res.json({
+            status: "success",
+            data: {
+                message: `GETTING messages for username: ${user}`
+            }
+        });
+    } else {
+        res.json({
+            status: "success",
+            data: {
+                message: "GET all messages",
+            }
+        });
+    }
 }
 
 const getMessageWithId = (req, res) => {
@@ -34,7 +44,7 @@ const updateMessage = (req, res) => {
         data: {
             message: `UPDATING message with ID: ${id}`
         }
-    })
+    });
 }
 
 const deleteMessage = (req, res) => {
@@ -44,7 +54,7 @@ const deleteMessage = (req, res) => {
         data: {
             message: `DELETING a message with ID: ${id}`
         }
-    })
+    });
 }
 
 module.exports.getAllMessages = getAllMessages;
