@@ -10,4 +10,6 @@ router.post("/", controllerMessages.saveMessage);
 
 router.put("/:id", controllerMessages.updateMessage);
 
+router.delete("/:id", controllerMessages.deleteMessage);
+
 module.exports = router;

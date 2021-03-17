@@ -2,7 +2,7 @@ const getAllMessages = (req, res) => {
     res.json({
         status: "success",
         data: {
-            messages: "GET all messages"
+            message: "GET all messages"
         }
     });
 }
@@ -37,7 +37,18 @@ const updateMessage = (req, res) => {
     })
 }
 
+const deleteMessage = (req, res) => {
+    let id = req.params.id;
+    res.json({
+        status: "success",
+        data: {
+            message: `DELETING a message with ID: ${id}`
+        }
+    })
+}
+
 module.exports.getAllMessages = getAllMessages;
 module.exports.getMessageWithId = getMessageWithId;
 module.exports.saveMessage = saveMessage;
 module.exports.updateMessage = updateMessage;
+module.exports.deleteMessage = deleteMessage;
