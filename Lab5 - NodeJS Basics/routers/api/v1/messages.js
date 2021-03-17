@@ -6,4 +6,6 @@ const controllerMessages = require("../../../controllers/api/v1/messages");
 router.get("/", controllerMessages.getAllMessages);
 router.get("/:id", controllerMessages.getMessageWithId);
 
+router.post("/", controllerMessages.saveMessage);
+
 module.exports = router;
