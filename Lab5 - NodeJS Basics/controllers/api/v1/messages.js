@@ -27,6 +27,17 @@ const saveMessage = (req, res) => {
     });
 }
 
+const updateMessage = (req, res) => {
+    let id = req.params.id;
+    res.json({
+        status: "success",
+        data: {
+            message: `UPDATING message with ID: ${id}`
+        }
+    })
+}
+
 module.exports.getAllMessages = getAllMessages;
 module.exports.getMessageWithId = getMessageWithId;
 module.exports.saveMessage = saveMessage;
+module.exports.updateMessage = updateMessage;

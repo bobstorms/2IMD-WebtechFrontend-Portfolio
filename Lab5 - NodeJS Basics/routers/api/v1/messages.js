@@ -8,4 +8,6 @@ router.get("/:id", controllerMessages.getMessageWithId);
 
 router.post("/", controllerMessages.saveMessage);
 
+router.put("/:id", controllerMessages.updateMessage);
+
 module.exports = router;
