@@ -18,3 +18,7 @@ My portfolio repo for all the labs of webtech frontend.
 
 ## Lab 4 - App Prototype
 [Codesandbox: Ad - Velo Antwerpen](https://codesandbox.io/s/bob-storms-ad-velo-antwerpen-qiv42)
+
+## Lab 5 - NodeJS Basics
+[Heroku: Messages API](https://messages-api-bob.herokuapp.com/)
+[Codepen: Forked "lab5-tester"](https://codepen.io/BobStorms/pen/RwomoWq)
