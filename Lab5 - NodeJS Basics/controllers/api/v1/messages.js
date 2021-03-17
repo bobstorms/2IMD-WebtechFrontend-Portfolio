@@ -7,4 +7,15 @@ const getAllMessages = (req, res) => {
     });
 }
 
+const getMessageWithId = (req, res) => {
+    let id = req.params.id;
+    res.json({
+        status: "success",
+        data: {
+            message: `GET message with ID: ${id}`
+        }
+    })
+}
+
 module.exports.getAllMessages = getAllMessages;
+module.exports.getMessageWithId = getMessageWithId;
