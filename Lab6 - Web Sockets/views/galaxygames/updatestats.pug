@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Galaxy Games | Update statistics
+        link(rel='stylesheet', href='./stylesheets/style.css')
+    body 
+        h1 Galaxy Games
+        h2 Update statistics
+        form(action="", method="POST")
+            select(name="team", id="team")
+                each team in teams
+                    option(value= team.id)= team.name
