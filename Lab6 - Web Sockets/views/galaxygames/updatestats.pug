@@ -9,11 +9,11 @@ html(lang="en")
     body 
         h1 Galaxy Games
         h2 Update statistics
-        form
+        form(class="update-form")
             select(name="team", id="team")
                 each team in teams
                     option(value= team.id)= team.name
             input(type="text", name="score", id="score")
-            input(type="submit", value="Update score")
+            input(type="submit", value="Update score", class="submit-button")
         script(src="../primus/primus.js")
         script(src="../javascripts/app.js")

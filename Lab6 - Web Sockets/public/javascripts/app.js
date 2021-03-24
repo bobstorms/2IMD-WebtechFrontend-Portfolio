@@ -6,3 +6,21 @@ primus = Primus.connect("http://localhost:3000", {
     }
 });
 
+if(document.querySelector(".update-form")) {
+
+    document.querySelector(".submit-button").addEventListener("click", (evt) => {
+        evt.preventDefault();
+        let team = document.querySelector("#team").value;
+        let score = document.querySelector("#score").value;
+        document.querySelector("#score").value = "";
+        
+        primus.write({
+            "action": "Updated stats",
+            "data": {
+                "team": team,
+                "score": score
+            }
+        })
+    });
+
+}

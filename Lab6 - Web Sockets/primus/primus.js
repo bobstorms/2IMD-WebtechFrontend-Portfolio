@@ -6,6 +6,7 @@ const go = (server) => {
         console.log('Received spark 🔥');
 
         spark.on('data', (data) => {
+            console.log(data);
             primus.write(data);
         });
 
