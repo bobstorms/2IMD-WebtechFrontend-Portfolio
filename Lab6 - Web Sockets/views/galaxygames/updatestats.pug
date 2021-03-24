@@ -13,3 +13,5 @@ html(lang="en")
             select(name="team", id="team")
                 each team in teams
                     option(value= team.id)= team.name
+            input(type="text", name="score", id="score")
+            input(type="submit", value="Update score")
