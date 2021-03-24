@@ -15,8 +15,8 @@ html(lang="en")
                 th Score 
             each team in teams
                 tr(id= team.id)
-                    td= team.code
-                    td= team.name
-                    td= team.score
+                    td(class="code")= team.code
+                    td(class="name")= team.name
+                    td(class="score")= team.score
         script(src="../primus/primus.js")
         script(src="../javascripts/app.js") 
