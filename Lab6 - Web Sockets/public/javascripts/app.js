@@ -24,14 +24,25 @@ if(document.querySelector(".update-form")) {
         let id = document.querySelector("#team").value;
         let score = document.querySelector("#score").value;
         document.querySelector("#score").value = "";
-        
-        primus.write({
-            "action": "updateStats",
-            "data": {
-                "id": id,
-                "score": score
-            }
-        })
+
+        let error = document.querySelector(".error");
+
+        if(score == "") {
+            error.style.display = "block";
+            error.innerText = "Please enter a score.";
+        } else {
+            error.style.display = "none";
+            error.innerText = "";
+
+            primus.write({
+                "action": "updateStats",
+                "data": {
+                    "id": id,
+                    "score": score
+                }
+            })
+        }
+
     });
 
 }
