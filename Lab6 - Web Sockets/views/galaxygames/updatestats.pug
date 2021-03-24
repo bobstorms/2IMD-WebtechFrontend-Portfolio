@@ -9,7 +9,7 @@ html(lang="en")
     body 
         h1 Galaxy Games
         h2 Update statistics
-        form(action="", method="POST")
+        form
             select(name="team", id="team")
                 each team in teams
                     option(value= team.id)= team.name
