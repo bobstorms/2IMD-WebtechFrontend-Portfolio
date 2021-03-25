@@ -22,3 +22,9 @@ My portfolio repo for all the labs of webtech frontend.
 ## Lab 5 - NodeJS Basics
 [Heroku: Messages API](https://messages-api-bob.herokuapp.com/)<br>
 [Codepen: Forked "lab5-tester"](https://codepen.io/BobStorms/pen/RwomoWq)
+
+## Lab 6 - Web Sockets
+[Repo: App repo linked to Heroku](https://github.com/bobstorms/galaxy-games)<br>
+[Heroku: Galaxy Games](https://galaxy-games.herokuapp.com)
+
+![Demo gif](https://github.com/bobstorms/2IMD-WebtechFrontend-Portfolio/blob/main/Lab6%20-%20Web%20Sockets/demo.gif)
