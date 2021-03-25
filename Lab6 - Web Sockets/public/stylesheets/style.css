@@ -1,10 +1,94 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap');
+
+* {
+  font-family: 'Lexend', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+body {
+  padding: 50px;
+  background: rgb(7,24,61);
+  background: radial-gradient(circle, rgba(7,24,61,1) 0%, rgba(4,17,46,1) 100%);
+  color: white;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #1B76F5;
+}
+
+th, td {
+  text-align: center;
+  padding: 1em;
+}
+
+tr:nth-child(n) {
+  background-color: #0b1d49;
+}
+
+tr:nth-child(2n) {
+  background-color: #0e2459;
+}
+
+.update-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#team {
+  background-color: #0d2152;
+  width: 200px;
+  font-size: 1em;
+  text-align: left;
+  color: white;
+  padding: .5em .6em .6em .6em;
+  border: none;
+  border-radius: 5px;
+}
+
+#team:hover {
+  cursor: pointer;
+}
+
+#score {
+  background-color: #0d2152;
+  width: 200px;
+  font-size: 1.3em;
+  text-align: left;
+  color: white;
+  padding: .5em .6em .6em .6em;
+  border: none;
+  border-radius: 5px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.submit-button {
+  background-color: #1B76F5;
+  color: white;
+  padding: .6em 1.2em .7em 1.2em;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  transition: background-color .5s ease;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  background-color: #1466d9;
 }
 
 .error {
