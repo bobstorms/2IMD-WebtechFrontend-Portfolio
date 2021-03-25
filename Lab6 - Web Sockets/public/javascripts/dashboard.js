@@ -12,7 +12,14 @@ primus.on("data", (json) => {
         let id = json.data.id;
         let score = json.data.score;
         let scoreText = document.querySelector(`#${id} > .score`);
+        
         scoreText.innerText = score;
+        let row = document.getElementById(id);
+        row.style.animation = "scaleEffect 1s ease-in-out 2";
+
+        setTimeout(() => {
+            row.style.animation = "none";
+        }, 2000);
     }
 
 });
